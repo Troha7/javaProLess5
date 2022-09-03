@@ -5,7 +5,6 @@ import ua.hillelit.lms.figures.api.FigureAreable;
 public class Circle implements FigureAreable {
 
     private double radius;
-    private final double PI = 3.1415926536;
 
     public Circle(double radius) {
         this.radius = radius;
@@ -13,7 +12,7 @@ public class Circle implements FigureAreable {
 
     @Override
     public double area() {
-        return PI * (radius * radius);
+        return Math.PI * radius * radius;
     }
 
     @Override
