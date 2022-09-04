@@ -20,4 +20,5 @@ public class Human extends Participant {
     public String getName() {
         return super.getName();
     }
+
 }

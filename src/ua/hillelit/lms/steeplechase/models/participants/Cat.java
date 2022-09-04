@@ -20,4 +20,5 @@ public class Cat extends Participant {
     public String getName() {
         return super.getName();
     }
+
 }

@@ -1,6 +1,7 @@
 package ua.hillelit.lms.steeplechase.models.obstacles;
 
-public class Wall extends Obstacle{
+public class Wall extends Obstacle {
+
     private double height;
 
     public Wall(String name, double height) {
@@ -9,12 +10,19 @@ public class Wall extends Obstacle{
     }
 
     @Override
-    public boolean overcome(double value) {
-        return value > height;
+    public String overcome(double value) {
+
+        if (value > height) {
+            return "[OVERCOMING!]";
+        } else {
+            return "[DID NOT OVERCOMING!]";
+        }
+
     }
 
     @Override
     public String getDistance() {
-        return  " at height [" + height + "] m.";
+        return " at height [" + height + "] m.";
     }
+
 }

@@ -2,7 +2,6 @@ package ua.hillelit.lms.steeplechase.controller;
 
 import ua.hillelit.lms.steeplechase.models.obstacles.Obstacle;
 import ua.hillelit.lms.steeplechase.models.obstacles.Treadmill;
-import ua.hillelit.lms.steeplechase.models.obstacles.Wall;
 import ua.hillelit.lms.steeplechase.models.participants.Participant;
 
 public class ObstacleControl {
@@ -15,24 +14,23 @@ public class ObstacleControl {
         this.obstacle = obstacle;
     }
 
-    public String participantMove(){
+    public String participantMove() {
 
-        if(obstacle instanceof Treadmill){
+        if (obstacle instanceof Treadmill) {
             return participant.run();
-        }
-        else {
+        } else {
             return participant.jump();
         }
+
     }
 
-    public boolean obstaclePassing(){
+    public String obstaclePassing() {
 
         double value;
 
-        if(obstacle instanceof Treadmill){
+        if (obstacle instanceof Treadmill) {
             value = participant.getMaxRunDistance();
-        }
-        else{
+        } else {
             value = participant.getMaxJumpHeight();
         }
         return obstacle.overcome(value);

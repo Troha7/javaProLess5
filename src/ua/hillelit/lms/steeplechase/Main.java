@@ -7,25 +7,28 @@ import ua.hillelit.lms.steeplechase.models.participants.Cat;
 import ua.hillelit.lms.steeplechase.models.participants.Human;
 import ua.hillelit.lms.steeplechase.models.participants.Participant;
 import ua.hillelit.lms.steeplechase.models.participants.Robot;
-import ua.hillelit.lms.steeplechase.view.ViewRace;
+import ua.hillelit.lms.steeplechase.controller.RaceControl;
 
 public class Main {
     public static void main(String[] args) {
 
-        Participant peter = new Human("Peter",600,1.5);
-        Participant terminator = new Robot("Terminator", 500, 2.6);
+        Participant vasil = new Human("Vasil",750,1.5);
+        Participant terminator = new Robot("Terminator", 1000, 2.6);
         Participant murchik = new Cat("Murchik",400,1.4);
 
-        Participant[] participants = {peter,terminator,murchik};
+        Participant[] participants = {vasil, terminator, murchik};
 
-        Obstacle one = new Treadmill("Short", 300);
-        Obstacle twu = new Wall("Brick",2);
-        Obstacle tre = new Wall("Wood",1.1);
+        Obstacle obst1 = new Treadmill("Short", 100);
+        Obstacle obst2 = new Wall("Wood",1.1);
+        Obstacle obst3 = new Wall("Brick",2);
+        Obstacle obst4 = new Treadmill("Midl", 450);
+        Obstacle obst5 = new Wall("Steel",2.5);
+        Obstacle obst6 = new Treadmill("Long", 950);
 
-        Obstacle[] obstacles = {one,twu,tre};
+        Obstacle[] obstacles = {obst1, obst2, obst3, obst4, obst5, obst6};
 
-        ViewRace viewRace = new ViewRace("1",participants,obstacles);
-        viewRace.raceControl();
+        RaceControl viewRace = new RaceControl("Сrazy",participants,obstacles);
+        viewRace.race();
 
     }
 }

@@ -20,4 +20,5 @@ public class Robot extends Participant {
     public String getName() {
         return super.getName();
     }
+
 }
