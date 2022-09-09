@@ -1,12 +1,10 @@
 package ua.hillelit.lms.steeplechase.models.participants;
 
-import ua.hillelit.lms.steeplechase.api.Movable;
+public abstract class Participant {
 
-public abstract class Participant implements Movable {
-
-    private String name;
-    private int maxRunDistance;
-    private double maxJumpHeight;
+    private final String name;
+    private final int maxRunDistance;
+    private final double maxJumpHeight;
 
     private final String className = this.getClass().getSimpleName();
 
@@ -16,14 +14,12 @@ public abstract class Participant implements Movable {
         this.maxJumpHeight = maxJumpHeight;
     }
 
-    @Override
     public String run() {
-        return className + " " + name + " run";
+        return " run";
     }
 
-    @Override
     public String jump() {
-        return className + " " + name + " jump";
+        return " jump";
     }
 
     public int getMaxRunDistance() {

@@ -1,10 +1,10 @@
 package ua.hillelit.lms.steeplechase.models.obstacles;
 
-import ua.hillelit.lms.steeplechase.api.Overcomable;
+import ua.hillelit.lms.steeplechase.models.participants.Participant;
 
-public abstract class Obstacle implements Overcomable {
+public abstract class Obstacle {
 
-    private String name;
+    private final String name;
 
     private final String className = this.getClass().getSimpleName();
 
@@ -12,10 +12,11 @@ public abstract class Obstacle implements Overcomable {
         this.name = name;
     }
 
-    public abstract String getDistance();
+    public abstract boolean overcome(Participant participant);
 
-    @Override
-    public abstract String overcome(double value);
+    public abstract String viewOvercoming(Participant participant);
+
+    public abstract String getDistance();
 
     public String getName() {
         return name + " " + className;

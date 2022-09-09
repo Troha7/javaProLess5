@@ -1,8 +1,10 @@
 package ua.hillelit.lms.steeplechase.models.obstacles;
 
+import ua.hillelit.lms.steeplechase.models.participants.Participant;
+
 public class Treadmill extends Obstacle {
 
-    private int length;
+    private final int length;
 
     public Treadmill(String name, int length) {
         super(name);
@@ -10,13 +12,22 @@ public class Treadmill extends Obstacle {
     }
 
     @Override
-    public String overcome(double value) {
+    public boolean overcome(Participant participant) {
 
-        if (value > length) {
-            return "[OVERCOMING!]";
+        return participant.getMaxRunDistance() > length;
+
+    }
+
+    @Override
+    public String viewOvercoming(Participant participant) {
+
+        String str = participant.run() + " & ";
+        if (overcome(participant)) {
+            str += "[OVERCOMING!]";
         } else {
-            return "[DID NOT OVERCOMING!]";
+            str += "[DID NOT OVERCOMING!]";
         }
+        return str;
 
     }
 

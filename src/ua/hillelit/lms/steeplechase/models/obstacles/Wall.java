@@ -1,8 +1,10 @@
 package ua.hillelit.lms.steeplechase.models.obstacles;
 
+import ua.hillelit.lms.steeplechase.models.participants.Participant;
+
 public class Wall extends Obstacle {
 
-    private double height;
+    private final double height;
 
     public Wall(String name, double height) {
         super(name);
@@ -10,13 +12,22 @@ public class Wall extends Obstacle {
     }
 
     @Override
-    public String overcome(double value) {
+    public boolean overcome(Participant participant) {
 
-        if (value > height) {
-            return "[OVERCOMING!]";
+        return participant.getMaxJumpHeight() > height;
+
+    }
+
+    @Override
+    public String viewOvercoming(Participant participant) {
+
+        String str = participant.jump() + " & ";
+        if (overcome(participant)) {
+            str += "[OVERCOMING!]";
         } else {
-            return "[DID NOT OVERCOMING!]";
+            str += "[DID NOT OVERCOMING!]";
         }
+        return str;
 
     }
 

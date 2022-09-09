@@ -3,55 +3,47 @@ package ua.hillelit.lms.steeplechase.controller;
 import ua.hillelit.lms.steeplechase.models.obstacles.Obstacle;
 import ua.hillelit.lms.steeplechase.models.participants.Participant;
 
-import java.util.Objects;
 
 public class RaceControl {
 
-    private String raceName;
-    private Participant[] participant;
-    private Obstacle[] obstacle;
+    private final String raceName;
+    private final Participant[] participants;
+    private final Obstacle[] obstacles;
 
-    public RaceControl(String raceName, Participant[] participant, Obstacle[] obstacle) {
+    public RaceControl(String raceName, Participant[] participants, Obstacle[] obstacles) {
         this.raceName = raceName;
-        this.participant = participant;
-        this.obstacle = obstacle;
+        this.participants = participants;
+        this.obstacles = obstacles;
     }
 
     public void race() {
 
-        System.out.println(raceName + " RACE");
         String lastOvercoming = "";
+        System.out.println(raceName + " RACE");
 
-        for (int i = 0; i < participant.length; i++) {
+        for (Participant participant : participants) {
+            System.out.println(participant.getName() + " [STARTS!]");
 
-            System.out.println("Track: " + (i + 1));
-            System.out.println(participant[i].getName() + " [STARTS!]");
+            for (Obstacle obstacle : obstacles) {
 
-            for (int j = 0; j < obstacle.length; j++) {
-
-                ObstacleControl control = new ObstacleControl(participant[i], obstacle[j]);
-                printObstacleOvercome(j, control);
-
-                if (Objects.equals(control.obstaclePassing(), "[DID NOT OVERCOMING!]")) {
-                    System.out.println(participant[i].getName() + " [LEFT THE RACE!] " + lastOvercoming);
+                System.out.println(viewParticipantResult(participant, obstacle));
+                if (!obstacle.overcome(participant)) {
+                    System.out.println("[LEFT THE RACE!] " + lastOvercoming);
                     break;
                 }
+                lastOvercoming = "Last " + viewParticipantResult(participant, obstacle);
 
-                lastOvercoming = "Last " + control.obstaclePassing()
-                        + " the " + obstacle[j].getName() + obstacle[j].getDistance();
             }
-        }
 
+        }
         System.out.println(raceName + " RACE IS OVER");
 
     }
 
-    private void printObstacleOvercome(int num, ObstacleControl control) {
+    private static String viewParticipantResult(Participant participant, Obstacle obstacle) {
 
-        String str = control.participantMove() + " & " + control.obstaclePassing() + " the "
-                + obstacle[num].getName() + obstacle[num].getDistance();
-
-        System.out.println(str);
+        return participant.getName() + obstacle.viewOvercoming(participant) + " the "
+                + obstacle.getName() + obstacle.getDistance();
 
     }
 
